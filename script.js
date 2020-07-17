@@ -1,7 +1,7 @@
 // makes sure everything is loaded before running JavaScript
 $(document).ready(function () {
     // need to declare timer
-    // need to declare score
+    let score = 0;
 
     //Storing all the questions 
     // Resource: https://stackoverflow.com/questions/37252041/storing-quiz-questions-in-array-of-objects
@@ -41,7 +41,27 @@ $(document).ready(function () {
     //         $("#answerList").children[i].text(questionList.choices[i]);
     //     }
     // }
+    
+    let questionIndex = 0;
 
+    function showQuestion() {
+        $("h1.uniqueQuestion").text(questionList[questionIndex].question);
+        for (let i = 0; i < questionList[questionIndex].choices.length; i++) {
+            $(".button-"+(i+1)).text(questionList[questionIndex].choices[i]);
+        }
+    }
+
+
+    function checkAnswer() {
+        if (questionList[questionIndex].answer === $(this).data("index")) {
+            score++;
+        }
+        console.log(score);
+        questionIndex++;
+        showQuestion();
+        }
+
+    $(".questionButton").on("click", checkAnswer);
 
     // when start button click, screen changes to question page
     $("#button-start").on("click", function () {
@@ -50,6 +70,7 @@ $(document).ready(function () {
         $("#startPage").hide();
         $("#questionPage").show();
         // getQuestions();
+        showQuestion();
     })
     console.log(questionList);
 
