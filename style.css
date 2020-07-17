@@ -3,7 +3,8 @@ header {
     background-color: rgb(136, 199, 241);
 }
 
-/* /9display: block) shows content, (display: none) hides content*/
+/*(display: block) shows content, (display: none) hides content 
+Resource: https://www.washington.edu/accesscomputing/webd2/student/unit5/module2/lesson5.html*/
 div.startPage {
     display: block;
 }
