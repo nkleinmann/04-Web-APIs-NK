@@ -2,3 +2,16 @@ header {
     padding: 15px;
     background-color: rgb(136, 199, 241);
 }
+
+/* /9display: block) shows content, (display: none) hides content*/
+div.startPage {
+    display: block;
+}
+
+div.questionPage {
+    display: none;
+}
+
+div.finalPage {
+    display: none;
+}
