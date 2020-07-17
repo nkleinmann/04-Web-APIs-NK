@@ -60,12 +60,13 @@ $(document).ready(function () {
         // Changes to final page if index is greater than or equal to questionList length
         if (questionIndex >= questionList.length) {
             $("#questionPage").hide();
-            $("#finalPage").show();
+            $("div.finalPage").show();
+            finalP();
         }
         // Otherwise shows next question
         else {
             // Delays next question for 1 second
-            setTimeout(showQuestion, 2000);
+            setTimeout(showQuestion, 1000);
         }
     }
 
@@ -81,5 +82,10 @@ $(document).ready(function () {
         // getQuestions();
         showQuestion();
     })
+
+    // displays final page and stores user input
+    function finalP() {
+        $("h3.yourScore").text("Your final score is " + score);
+    }
 
 })

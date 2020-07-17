@@ -68,10 +68,19 @@
 
         <!--Final quiz page-->
         <div class="finalPage">
-            <div class="row m-4 finalPage">
+            <div class="row m-4">
                 <div class="col-3"></div>
                 <section class="col-6">
-                    <h1 class="finished d-flex justify-content-center">End of Quiz!</h1>
+                    <h1 class="finished text-center">End of Quiz!</h1>
+                    <h3 class="yourScore text-center"></h3>
+                    <form>
+                        <div class="form-group">
+                            <p>Your Initials: </p>
+                            <input type="initials" class="form-control" id="yourInitials" aria-describedby="Your Initials">
+                            <br>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
                 </section>
                 <div class="col-3"></div>
             </div>
