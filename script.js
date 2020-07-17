@@ -41,13 +41,13 @@ $(document).ready(function () {
     //         $("#answerList").children[i].text(questionList.choices[i]);
     //     }
     // }
-    
+
     let questionIndex = 0;
 
     function showQuestion() {
         $("h1.uniqueQuestion").text(questionList[questionIndex].question);
         for (let i = 0; i < questionList[questionIndex].choices.length; i++) {
-            $(".button-"+(i+1)).text(questionList[questionIndex].choices[i]);
+            $(".button-" + (i + 1)).text(questionList[questionIndex].choices[i]);
         }
     }
 
@@ -58,8 +58,14 @@ $(document).ready(function () {
         }
         console.log(score);
         questionIndex++;
-        showQuestion();
+        if (questionIndex > 4) {
+            $("#questionPage").hide();
+            $("#finalPage").show();
         }
+        else {
+            showQuestion();
+        }
+    }
 
     $(".questionButton").on("click", checkAnswer);
 
