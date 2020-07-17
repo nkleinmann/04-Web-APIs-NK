@@ -3,7 +3,7 @@ $(document).ready(function () {
     // need to declare timer
     let score = 0;
 
-    //Storing all the questions 
+    // Storing all questions and answers in an array of objects
     // Resource: https://stackoverflow.com/questions/37252041/storing-quiz-questions-in-array-of-objects
     const questionList = [
         {
@@ -33,17 +33,11 @@ $(document).ready(function () {
         },
     ];
 
-    // Resource: https://www.sitepoint.com/community/t/checking-answer-in-a-quiz/325000
-    // function getQuestions() {
-    //     let indexQuestion = 0;
-    //     for (let i = 0; i < questionList.length; i++) {
-    //         $("#questionPage").text(questionList[i].questionList);
-    //         $("#answerList").children[i].text(questionList.choices[i]);
-    //     }
-    // }
 
+    // This variable lets me loop through my questions
     let questionIndex = 0;
 
+    // Shows questions from my array of objects
     function showQuestion() {
         $("h1.uniqueQuestion").text(questionList[questionIndex].question);
         for (let i = 0; i < questionList[questionIndex].choices.length; i++) {
@@ -52,32 +46,36 @@ $(document).ready(function () {
     }
 
 
+    // Checks answers to questions
     function checkAnswer() {
         if (questionList[questionIndex].answer === $(this).data("index")) {
             score++;
         }
         console.log(score);
         questionIndex++;
-        if (questionIndex > 4) {
+
+        // Changes to final page if index is greater than or equal to questionList length
+        if (questionIndex >= questionList.length) {
             $("#questionPage").hide();
             $("#finalPage").show();
         }
+        // Otherwise shows next question
         else {
             showQuestion();
         }
     }
 
+    // When button in question clicked, answer is checked (checkAnswer function is called)
     $(".questionButton").on("click", checkAnswer);
 
     // when start button click, screen changes to question page
     $("#button-start").on("click", function () {
         console.log("You clicked a button!");
-        //Resource: https://www.w3schools.com/jquery/jquery_hide_show.asp
+        // Resource: https://www.w3schools.com/jquery/jquery_hide_show.asp
         $("#startPage").hide();
         $("#questionPage").show();
         // getQuestions();
         showQuestion();
     })
-    console.log(questionList);
 
 })
