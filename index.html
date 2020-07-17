@@ -1,46 +1,78 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-    <head>
-        <meta charset="UTF -8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JavaScript Quiz</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> 
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    </head>
+<head>
+    <meta charset="UTF -8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Quiz</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 
-    <body>
-        <main class="container-fluid">
+<body>
+    <main class="container-fluid">
 
-            <!--Welcoms Screen for Coding Quiz-->
-            <div class="row">
-                <div class="col-3">
+        <!--Header for high score and timer-->
+        <header>
+            <div class="row" id='highScore'>
+                <div class="col-5">
                     <h6>View High Scores!</h3>
                 </div>
-                <div class="col-6"></div>
+                <div class="col-4"></div>
                 <div class="col-3 d-flex justify-content-end">
-                    <h6>Time: </h6>  
+                    <h6>Time: </h6>
                 </div>
             </div>
-            <div class="row">
+        </header>
+        <!--End header-->
+
+        <!--Welcome Screen for Coding Quiz-->
+        <div class="row m-4">
+            <div class="col-3"></div>
+            <section class="col-6">
+                <h1 class="text-center">Coding Quiz Challenge</h1>
+                <p class="text-center">Try to answer the following code-related questions within the time limit. Keep in
+                    mind that incorrect answers will penalize
+                    your scoretime by ten seconds!
+                </p>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary" id="button-start">Start Quiz!</button>
+                </div>
                 <div class="col-3"></div>
-                <section class="col-6">
-                        <h1 class="text-center">Coding Quiz Challenge</h1>
-                        <p class="text-center">Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize
-                            your scoretime by ten seconds!
-                        </p>
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-primary">Start Quiz!</button>
-                    </div>
-                    <div class="col-3"></div>
-                </section>
-            </div>
-            <!-- End of Welcome Screen-->
-            
-        </main>
-       
-        <script src="script.js"></script>
-    </body>
+            </section>
+        </div>
+        <!-- End of Welcome Screen-->
+
+        <!--Question screen-->
+        <div class="row m-4 question">
+            <div class="col-3"></div>
+            <section class="col-6">
+                <h1 class="uniqueQuestion"></h1>
+                <ul class="answerList">
+                    <li><button class="button-1"></button></li>
+                    <li><button class="button-2"></button></li>
+                    <li><button class="button-3"></button></li>
+                    <li><button class="button-4"></button></li>
+                </ul>
+            </section>
+            <div class="col-3"></div>
+        </div>
+        <hr>
+        <div class="incorrectCorrect"></div>
+        <!--End Question screen-->
+
+        <!--Final of quiz page-->
+
+        <!--End of final quiz page-->
+
+        <!--High Score page-->
+
+        <!--End of high score page-->
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
 
 </html>
