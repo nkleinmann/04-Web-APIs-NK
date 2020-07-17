@@ -3,7 +3,7 @@ $(document).ready(function () {
     // need to declare timer
     let score = 0;
 
-    // Storing all questions and answers in an array of objects
+    // Storing all questions and answers in an array of objects (I used the quiz questions from the gif)
     // Resource: https://stackoverflow.com/questions/37252041/storing-quiz-questions-in-array-of-objects
     const questionList = [
         {
@@ -39,19 +39,22 @@ $(document).ready(function () {
 
     // Shows questions from my array of objects
     function showQuestion() {
+        $("div.incorrectCorrect").text("");
         $("h1.uniqueQuestion").text(questionList[questionIndex].question);
         for (let i = 0; i < questionList[questionIndex].choices.length; i++) {
             $(".button-" + (i + 1)).text(questionList[questionIndex].choices[i]);
         }
     }
 
-
     // Checks answers to questions
     function checkAnswer() {
         if (questionList[questionIndex].answer === $(this).data("index")) {
             score++;
+            $("div.incorrectCorrect").text("Correct!");
         }
-        console.log(score);
+        else {
+            $("div.incorrectCorrect").text("Incorrect!");
+        }
         questionIndex++;
 
         // Changes to final page if index is greater than or equal to questionList length
@@ -61,11 +64,12 @@ $(document).ready(function () {
         }
         // Otherwise shows next question
         else {
-            showQuestion();
+            // Delays next question for 1 second
+            setTimeout(showQuestion, 2000);
         }
     }
 
-    // When button in question clicked, answer is checked (checkAnswer function is called)
+    // When button in question clicked, answer is checked (checkAnswer function is called))
     $(".questionButton").on("click", checkAnswer);
 
     // when start button click, screen changes to question page
