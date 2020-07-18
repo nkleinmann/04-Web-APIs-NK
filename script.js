@@ -96,23 +96,21 @@ $(document).ready(function () {
         $("h3.yourScore").text("Your final score is " + score);
     }
 
+    // sets empty array
     let scoresArray = [];
 
 
     //Stores scores in local storage
     function storelocalStorage() {
         scoresArray = JSON.parse(localStorage.getItem("scores"));
-        // console.log(scores);
         const initials = $("#yourInitials").val();
-        // console.log(initials);
         let userScore = { initials, score };
-        // console.log(userScore);
+       
         if (!scoresArray) {
             scoresArray = [];
         }
         scoresArray.push(userScore);
         localStorage.setItem("scores", JSON.stringify(scoresArray));
-        // console.log(scoresArray);
     }
 
     // Loads high scores from local storage and puts scores on screen
@@ -120,13 +118,11 @@ $(document).ready(function () {
         let scoresArray = localStorage.getItem("scores");
         if (!scoresArray) {
             scoresArray = [];
-            // console.log(scoresArray);
         }
         else {
             scoresArray = JSON.parse(scoresArray);
             console.log(scoresArray);
             console.log(scoresArray[0].initials);
-            // console.log(scoresArray[0].score);
         }
         // Sorts the scores for High Score page
         scoresArray.sort(function (a, b) {
@@ -135,10 +131,8 @@ $(document).ready(function () {
 
         // Loops through scoresArray and displays initials and score on page
         for (let i = 0; i < scoresArray.length; i++) {
-            // let liEl = $("<li></li>").appendTo("ul");
             let newLiEl = $("<li>")
             newLiEl.text(scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score);
-            // $("<li>" + scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score + "</li>");
             $("#high-scores").append(newLiEl);
         }
     }
@@ -186,7 +180,6 @@ $(document).ready(function () {
         $('#high-scores').empty();
         storelocalStorage()
         loadStorageScores()
-        console.log(scoresArray);
         $("div.finalPage").hide();
         $("div.highScorePage").show();
     })
