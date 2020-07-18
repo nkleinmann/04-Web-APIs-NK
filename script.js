@@ -121,8 +121,6 @@ $(document).ready(function () {
         }
         else {
             scoresArray = JSON.parse(scoresArray);
-            console.log(scoresArray);
-            console.log(scoresArray[0].initials);
         }
         // Sorts the scores for High Score page
         scoresArray.sort(function (a, b) {
