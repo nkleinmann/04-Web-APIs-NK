@@ -100,12 +100,12 @@ $(document).ready(function () {
     let scoresArray = [];
 
 
-    //Stores scores in local storage
+    //Stores initials and scores in local storage
     function storelocalStorage() {
         scoresArray = JSON.parse(localStorage.getItem("scores"));
         const initials = $("#yourInitials").val();
         let userScore = { initials, score };
-       
+
         if (!scoresArray) {
             scoresArray = [];
         }
