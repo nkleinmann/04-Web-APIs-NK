@@ -1,6 +1,6 @@
 // makes sure everything is loaded before running JavaScript
 $(document).ready(function () {
-    let timer = 60;
+    let timer = 30;
     let timeLeft;
     let score = 0;
 
@@ -47,6 +47,8 @@ $(document).ready(function () {
         }
     }
 
+    let game = false;
+
     // Checks answers to questions
     function checkAnswer() {
         if (questionList[questionIndex].answer === $(this).data("index")) {
@@ -56,18 +58,20 @@ $(document).ready(function () {
         else {
             $("div.incorrectCorrect").text("Incorrect!");
             // Subtracts 10 seconds if answer is wrong
-            if (timer >= 10) {
                 timer = timer - 10;
-            }
-            if (timer <= 0) {
-                clearInterval(timeLeft);
-                timer = 0;
-            }
+                if (timer <= 0) {
+                    timer = 1;
+                    $("#questionPage").hide();
+                    $("div.finalPage").show();
+                    finalP();
+                } 
         }
         questionIndex++;
 
         // Changes to final page if index is greater than or equal to questionList length
         if (questionIndex >= questionList.length) {
+            game = true;
+            timer = 1;
             $("#questionPage").hide();
             $("div.finalPage").show();
             finalP();
@@ -112,6 +116,25 @@ $(document).ready(function () {
     //     }
     // }
 
+    function timerCounter() {
+          // Timer
+          timeLeft = setInterval(function () {
+            timer--;
+            $("h6.time").text(timer + "seconds");
+            if (timer <= 0) {
+                clearInterval(timeLeft);
+                timer = 0;
+            }
+        }, 1000)
+        if (game === true) {
+            $("#questionPage").hide();
+            $("div.finalPage").show();
+            finalP();
+        }
+
+
+    }
+
     // when start button click, screen changes to question page
     $("#button-start").on("click", function () {
         console.log("You clicked a button!");
@@ -119,15 +142,8 @@ $(document).ready(function () {
         $("#startPage").hide();
         $("#questionPage").show();
 
-        // Timer
-        timeLeft = setInterval(function () {
-            timer--;
-            $("h6.time").text(timer + "seconds");
-            if (timer <= 0) {
-                clearInterval(timeLeft);
-            }
-        }, 1000)
-
+        timerCounter();
+      
         // getQuestions();
         showQuestion();
 
