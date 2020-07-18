@@ -54,18 +54,25 @@ $(document).ready(function () {
         if (questionList[questionIndex].answer === $(this).data("index")) {
             score++;
             $("div.incorrectCorrect").text("Correct!");
+            // changes to final page when timer equals 0
+            if (timer <= 0) {
+                timer = 1;
+                $("#questionPage").hide();
+                $("div.finalPage").show();
+                finalP();
+            }
         }
         else {
             $("div.incorrectCorrect").text("Incorrect!");
             // Subtracts 10 seconds if answer is wrong
-                timer = timer - 10;
-                // changes to final page when timer equals 0
-                if (timer <= 0) {
-                    timer = 1;
-                    $("#questionPage").hide();
-                    $("div.finalPage").show();
-                    finalP();
-                } 
+            timer = timer - 10;
+            // changes to final page when timer equals 0
+            if (timer <= 0) {
+                timer = 1;
+                $("#questionPage").hide();
+                $("div.finalPage").show();
+                finalP();
+            }
         }
         questionIndex++;
 
@@ -98,43 +105,49 @@ $(document).ready(function () {
         // console.log(scores);
         const initials = $("#yourInitials").val();
         // console.log(initials);
-        let userScore = {initials, score};
+        let userScore = { initials, score };
         // console.log(userScore);
         if (!scoresArray) {
             scoresArray = [];
-        } 
+        }
         scoresArray.push(userScore);
         localStorage.setItem("scores", JSON.stringify(scoresArray));
+        // console.log(scoresArray);
     }
 
     // Loads high scores from local storage and puts scores on screen
     function loadStorageScores() {
-        let scoresArray = JSON.parse(localStorage.getItem("storedScores"));
+        let scoresArray = localStorage.getItem("scores");
         if (!scoresArray) {
-            scoresArray = []
+            scoresArray = [];
+            // console.log(scoresArray);
         }
         else {
-            scoresArray = JSON.parse(scoresArray)
+            scoresArray = JSON.parse(scoresArray);
             console.log(scoresArray);
             console.log(scoresArray[0].initials);
-            console.log(scoresArray[0].score);
+            // console.log(scoresArray[0].score);
         }
         // Sorts the scores for High Score page
-        scoresArray.sort(function(a,b) {
+        scoresArray.sort(function (a, b) {
             return b.score - a.score;
-        })
+        });
+
+        $('#scoresAndInitials').remove();
         // Loops through scoresArray and displays initials and score on page
-        for (let i=0; i < scoresArray.length; i++) {
+        for (let i = 0; i < scoresArray.length; i++) {
             // let liEl = $("<li></li>").appendTo("ul");
-            let newLiEl = $("<li>" + scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score + "</li>");
+            let newLiEl = $("<li>")
+            newLiEl.text(scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score);
+            // $("<li>" + scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score + "</li>");
             $("#high-scores").append(newLiEl);
         }
     }
 
     // timer
     function timerCounter() {
-          timer = 30;
-          timeLeft = setInterval(function () {
+        timer = 30;
+        timeLeft = setInterval(function () {
             timer--;
             $("h6.time").text(timer + "seconds");
             if (timer <= 0) {
@@ -151,13 +164,12 @@ $(document).ready(function () {
 
     // when start button click, screen changes to question page
     $("#button-start").on("click", function () {
-        console.log("You clicked a button!");
         // Resource: https://www.w3schools.com/jquery/jquery_hide_show.asp
         $("#startPage").hide();
         $("#questionPage").show();
 
         timerCounter();
-      
+
         // getQuestions();
         showQuestion();
 
@@ -168,7 +180,7 @@ $(document).ready(function () {
     $(".questionButton").on("click", checkAnswer);
 
     // When form is submitted add to local storage and add initials and scores to page as well as change to highScorePage
-    $("#initials").on("submit", function(event) {
+    $("#initials").on("submit", function (event) {
         event.preventDefault();
         storelocalStorage()
         loadStorageScores()
@@ -178,18 +190,19 @@ $(document).ready(function () {
     })
 
     // Restart Game
-    $(".goBack").on("click", function() {
+    $(".goBack").on("click", function () {
         $("div.highScorePage").hide();
         $("div.startPage").show();
+        let questionIndex = 0;
     })
 
     // Clear High Scores
-    $(".clearScores").on("click", function() {
+    $(".clearScores").on("click", function () {
         localStorage.clear();
     });
 
     // View my high scores button (in top left of header)
-    $(".btn-highscores").on("click", function() {
+    $(".btn-highscores").on("click", function () {
         $("div.highScorePage").show();
         $("div.startPage").hide();
     });
