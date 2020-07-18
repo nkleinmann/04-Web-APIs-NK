@@ -133,7 +133,6 @@ $(document).ready(function () {
             return b.score - a.score;
         });
 
-        $('#scoresAndInitials').remove();
         // Loops through scoresArray and displays initials and score on page
         for (let i = 0; i < scoresArray.length; i++) {
             // let liEl = $("<li></li>").appendTo("ul");
@@ -184,6 +183,7 @@ $(document).ready(function () {
     // When form is submitted add to local storage and add initials and scores to page as well as change to highScorePage
     $("#initials").on("submit", function (event) {
         event.preventDefault();
+        $('#high-scores').empty();
         storelocalStorage()
         loadStorageScores()
         console.log(scoresArray);
@@ -208,6 +208,7 @@ $(document).ready(function () {
         $("div.highScorePage").show();
         $("div.startPage").hide();
         $("#questionPage").hide();
+        $("div.finalPage").hide();
         timer = 1;
     });
 
