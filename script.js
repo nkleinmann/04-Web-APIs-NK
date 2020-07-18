@@ -89,49 +89,51 @@ $(document).ready(function () {
         $("h3.yourScore").text("Your final score is " + score);
     }
 
-    let scores = [];
+    let scoresArray = [];
 
 
     //Stores scores in local storage
     function storelocalStorage() {
-        scores = JSON.parse(localStorage.getItem("scores"));
-        console.log(scores);
+        scoresArray = JSON.parse(localStorage.getItem("scores"));
+        // console.log(scores);
         const initials = $("#yourInitials").val();
-        console.log(initials);
+        // console.log(initials);
         let userScore = {initials, score};
-        console.log(userScore);
-        if (!scores) {
-            scores = [];
+        // console.log(userScore);
+        if (!scoresArray) {
+            scoresArray = [];
         } 
-        scores.push(userScore);
-        localStorage.setItem("scores", JSON.stringify(scores));
+        scoresArray.push(userScore);
+        localStorage.setItem("scores", JSON.stringify(scoresArray));
     }
 
-    // Loads high scores from local storage
+    // Loads high scores from local storage and puts scores on screen
     function loadStorageScores() {
-        let findScoredScores = JSON.parse(localStorage.getItem("scores"));
-        if (findScoredScores) {
-            scores = findScoredScores;
-            scores.append(findScoredScores);
+        let scoresArray = JSON.parse(localStorage.getItem("storedScores"));
+        if (!scoresArray) {
+            scoresArray = []
+        }
+        else {
+            scoresArray = JSON.parse(scoresArray)
+            console.log(scoresArray);
+            console.log(scoresArray[0].initials);
+            console.log(scoresArray[0].score);
+        }
+        // Sorts the scores for High Score page
+        scoresArray.sort(function(a,b) {
+            return b.score - a.score;
+        })
+        // Loops through scoresArray and displays initials and score on page
+        for (let i=0; i < scoresArray.length; i++) {
+            // let liEl = $("<li></li>").appendTo("ul");
+            let newLiEl = $("<li>" + scoresArray[i].initials.toUpperCase() + "-" + scoresArray[i].score + "</li>");
+            $("#high-scores").append(newLiEl);
         }
     }
 
-    // // Adds scores in li elements
-    // function addHighScore() {
-    //     for (let z = 0, z < scores.length; z++) {
-    //         let score = scores[z];
-    //         let li = document.createElement("li");
-    //         li.textContent = score;
-    //         li.setAttribute("data-indes", z);
-
-    //         $("#high-scores").appendChild(li);
-
-    //     }
-    // }
-
     // timer
     function timerCounter() {
-          // Timer
+          timer = 30;
           timeLeft = setInterval(function () {
             timer--;
             $("h6.time").text(timer + "seconds");
@@ -165,12 +167,32 @@ $(document).ready(function () {
     // When button in question clicked, answer is checked (checkAnswer function is called))
     $(".questionButton").on("click", checkAnswer);
 
+    // When form is submitted add to local storage and add initials and scores to page as well as change to highScorePage
     $("#initials").on("submit", function(event) {
         event.preventDefault();
         storelocalStorage()
         loadStorageScores()
-        console.log(scores);
+        console.log(scoresArray);
         $("div.finalPage").hide();
         $("div.highScorePage").show();
     })
+
+    // Restart Game
+    $(".goBack").on("click", function() {
+        $("div.highScorePage").hide();
+        $("div.startPage").show();
+    })
+
+    // Clear High Scores
+    $(".clearScores").on("click", function() {
+        localStorage.clear();
+    });
+
+    // View my high scores button (in top left of header)
+    $(".btn-highscores").on("click", function() {
+        $("div.highScorePage").show();
+        $("div.startPage").hide();
+    });
+
+
 })
