@@ -153,6 +153,8 @@ $(document).ready(function () {
             if (timer <= 0) {
                 clearInterval(timeLeft);
                 timer = 0;
+                $("#questionPage").hide();
+                $("div.finalPage").show();
             }
         }, 1000)
         if (game === true) {
@@ -193,7 +195,7 @@ $(document).ready(function () {
     $(".goBack").on("click", function () {
         $("div.highScorePage").hide();
         $("div.startPage").show();
-        let questionIndex = 0;
+        questionIndex = 0;
     })
 
     // Clear High Scores
@@ -205,6 +207,8 @@ $(document).ready(function () {
     $(".btn-highscores").on("click", function () {
         $("div.highScorePage").show();
         $("div.startPage").hide();
+        $("#questionPage").hide();
+        timer = 1;
     });
 
 
