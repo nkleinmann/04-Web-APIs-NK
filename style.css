@@ -1,3 +1,7 @@
+body {
+    font-family: 'Rowdies', cursive;
+}
+
 header {
     padding: 15px;
     background-color: rgb(136, 199, 241);
@@ -15,4 +19,8 @@ div.questionPage {
 
 div.finalPage {
     display: none;
+}
+
+div.highScorePage {
+    display:none;
 }

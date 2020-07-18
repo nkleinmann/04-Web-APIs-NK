@@ -88,4 +88,17 @@ $(document).ready(function () {
         $("h3.yourScore").text("Your final score is " + score);
     }
 
+    let scores = [];
+    //Stores scores in local storage
+    function localStorageScores() {
+        localStorage.setItem($("scores", JSON.stringify(scores)));
+        scores.push(localStorage);
+    }
+
+    $(".submitFinal").on("submit", function() {
+        localStorageScores();
+        console.log(localStorage);
+        $("div.finalPage").hide();
+        $("div.highScorePage").show();
+    })
 })
