@@ -9,7 +9,7 @@ Parts of Website:
 3. When user selects answer, user is presented with incorrect or correct
 4. Time is subtracted from the clock when answer is incorrect
 5. When all questions are answered or timer reaches 0, quiz ends
-6. When the game is over, user can same initials and score
+6. When the game is over, user can save initials and score
 
 Challenges: This was very difficult as well as fun to build.  This is the first project that I worked with jQuery and local storage.  One of the most difficult parts for me was creating how to show a high score list at the end of the quiz using local storage.  Another challenging part, was trying to figure out the logic for how to loop through the series of questions (hint: I ended up using questionIndex).  
 
