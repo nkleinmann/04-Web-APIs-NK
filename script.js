@@ -59,6 +59,7 @@ $(document).ready(function () {
             $("div.incorrectCorrect").text("Incorrect!");
             // Subtracts 10 seconds if answer is wrong
                 timer = timer - 10;
+                // changes to final page when timer equals 0
                 if (timer <= 0) {
                     timer = 1;
                     $("#questionPage").hide();
@@ -89,6 +90,7 @@ $(document).ready(function () {
     }
 
     let scores = [];
+
     //Stores scores in local storage
     function localStorageScores() {
         localStorage.setItem($("scores", JSON.stringify(scores)));
@@ -101,6 +103,7 @@ $(document).ready(function () {
         if (findScoredScores) {
             scores = findScoredScores;
         }
+        scores.append(findScoredScores);
     }
 
     // // Adds scores in li elements
@@ -116,6 +119,7 @@ $(document).ready(function () {
     //     }
     // }
 
+    // timer
     function timerCounter() {
           // Timer
           timeLeft = setInterval(function () {
@@ -131,8 +135,6 @@ $(document).ready(function () {
             $("div.finalPage").show();
             finalP();
         }
-
-
     }
 
     // when start button click, screen changes to question page
@@ -153,9 +155,10 @@ $(document).ready(function () {
     // When button in question clicked, answer is checked (checkAnswer function is called))
     $(".questionButton").on("click", checkAnswer);
 
-    $(".submitFinal").on("submit", function () {
-        localStorageScores();
-        loadStorageScores();
+    $("#initials").on("submit", function(event) {
+        event.preventDefault();
+        // localStorageScores();
+        // loadStorageScores();
         console.log(scores);
         $("div.finalPage").hide();
         $("div.highScorePage").show();
