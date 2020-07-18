@@ -1,6 +1,7 @@
 // makes sure everything is loaded before running JavaScript
 $(document).ready(function () {
-    // need to declare timer
+    let timer = 60;
+    let timeLeft;
     let score = 0;
 
     // Storing all questions and answers in an array of objects (I used the quiz questions from the gif)
@@ -54,6 +55,14 @@ $(document).ready(function () {
         }
         else {
             $("div.incorrectCorrect").text("Incorrect!");
+            // Subtracts 10 seconds if answer is wrong
+            if (timer >= 10) {
+                timer = timer - 10;
+            }
+            if (timer <= 0) {
+                clearInterval(timeLeft);
+                timer = 0;
+            }
         }
         questionIndex++;
 
@@ -70,19 +79,6 @@ $(document).ready(function () {
         }
     }
 
-    // When button in question clicked, answer is checked (checkAnswer function is called))
-    $(".questionButton").on("click", checkAnswer);
-
-    // when start button click, screen changes to question page
-    $("#button-start").on("click", function () {
-        console.log("You clicked a button!");
-        // Resource: https://www.w3schools.com/jquery/jquery_hide_show.asp
-        $("#startPage").hide();
-        $("#questionPage").show();
-        // getQuestions();
-        showQuestion();
-    })
-
     // displays final page and stores user input
     function finalP() {
         $("h3.yourScore").text("Your final score is " + score);
@@ -95,9 +91,56 @@ $(document).ready(function () {
         scores.push(localStorage);
     }
 
-    $(".submitFinal").on("submit", function() {
+    // Loads high scores from local storage
+    function loadStorageScores() {
+        const findScoredScores = JSON.parse(localStorage.getItem("scores"));
+        if (findScoredScores) {
+            scores = findScoredScores;
+        }
+    }
+
+    // // Adds scores in li elements
+    // function addHighScore() {
+    //     for (let z = 0, z < scores.length; z++) {
+    //         let score = scores[z];
+    //         let li = document.createElement("li");
+    //         li.textContent = score;
+    //         li.setAttribute("data-indes", z);
+
+    //         $("#high-scores").appendChild(li);
+
+    //     }
+    // }
+
+    // when start button click, screen changes to question page
+    $("#button-start").on("click", function () {
+        console.log("You clicked a button!");
+        // Resource: https://www.w3schools.com/jquery/jquery_hide_show.asp
+        $("#startPage").hide();
+        $("#questionPage").show();
+
+        // Timer
+        timeLeft = setInterval(function () {
+            timer--;
+            $("h6.time").text(timer + "seconds");
+            if (timer <= 0) {
+                clearInterval(timeLeft);
+            }
+        }, 1000)
+
+        // getQuestions();
+        showQuestion();
+
+
+    })
+
+    // When button in question clicked, answer is checked (checkAnswer function is called))
+    $(".questionButton").on("click", checkAnswer);
+
+    $(".submitFinal").on("submit", function () {
         localStorageScores();
-        console.log(localStorage);
+        loadStorageScores();
+        console.log(scores);
         $("div.finalPage").hide();
         $("div.highScorePage").show();
     })
