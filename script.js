@@ -91,19 +91,29 @@ $(document).ready(function () {
 
     let scores = [];
 
+
     //Stores scores in local storage
-    function localStorageScores() {
-        localStorage.setItem($("scores", JSON.stringify(scores)));
-        scores.push(localStorage);
+    function storelocalStorage() {
+        scores = JSON.parse(localStorage.getItem("scores"));
+        console.log(scores);
+        const initials = $("#yourInitials").val();
+        console.log(initials);
+        let userScore = {initials, score};
+        console.log(userScore);
+        if (!scores) {
+            scores = [];
+        } 
+        scores.push(userScore);
+        localStorage.setItem("scores", JSON.stringify(scores));
     }
 
     // Loads high scores from local storage
     function loadStorageScores() {
-        const findScoredScores = JSON.parse(localStorage.getItem("scores"));
+        let findScoredScores = JSON.parse(localStorage.getItem("scores"));
         if (findScoredScores) {
             scores = findScoredScores;
+            scores.append(findScoredScores);
         }
-        scores.append(findScoredScores);
     }
 
     // // Adds scores in li elements
@@ -157,8 +167,8 @@ $(document).ready(function () {
 
     $("#initials").on("submit", function(event) {
         event.preventDefault();
-        // localStorageScores();
-        // loadStorageScores();
+        storelocalStorage()
+        loadStorageScores()
         console.log(scores);
         $("div.finalPage").hide();
         $("div.highScorePage").show();
