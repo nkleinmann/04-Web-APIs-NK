@@ -1,6 +1,8 @@
 # 04-Web-APIs-NK
 
-Fourth homework for UNH coding Bootcamp: Coding Quiz.  I built the quiz from scratch and used a script.js file.  The quiz is timed (30 seconds) and subtracts 10 seconds for every incorrect answer.  There are currently 5 problems about JavaScript.  Be careful, when the timer runs out, the quiz is over!
+Fourth homework for UNH coding Bootcamp: Coding Quiz (Coding Quiz).  I built the quiz from scratch and used a script.js file.  The quiz is timed (30 seconds) and subtracts 10 seconds for every incorrect answer.  There are currently 5 problems about JavaScript.  Be careful, when the timer runs out, the quiz is over!
+
+Technologies used: HTML, CSS and CSS Framework: Bootstrap, JavaScript, and jQuery
 
 Parts of Website:
 
@@ -17,3 +19,5 @@ Here is the link to my application: [View the Code Quiz!](https://nkleinmann.git
 
 Screenshot of Website:
 <img width="1278" alt="Screen Shot 2020-07-18 at 6 27 38 PM" src="https://user-images.githubusercontent.com/65608809/87863157-33030e80-c926-11ea-84af-832a64c2c0c7.png">
+![CD](https://user-images.githubusercontent.com/65608809/90304337-a8f68900-de84-11ea-9103-5f0ba446d379.jpg)
+Contact info: nekleinmann@gmail.com
